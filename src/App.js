@@ -1,9 +1,10 @@
 import "./App.css";
 import Header from "./cmps/header/header.js/Header";
 import Products from "./cmps/products/Products";
+import { useState } from "react";
 
 function App() {
-  const Data = [
+  const [Data, setViewFilter] = useState([
     {
       id: 1,
       title: "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
@@ -270,14 +271,23 @@ function App() {
         count: 145,
       },
     },
-  ];
+  ]);
+
+  function ViewFilter(selectedCategory) {
+    const filteredview = Data.filter(
+      (item) => item.category === selectedCategory
+    );
+    setViewFilter(filteredview);
+  }
+
   return (
     <div className="App">
       <h1>Jackets</h1>
-      <Header />
+      <Header ProductArr={Data} ViewFilter={ViewFilter} setViewFilter={setViewFilter}/>
       <Products ProductArr={Data} />
     </div>
   );
+
 }
 
 export default App;

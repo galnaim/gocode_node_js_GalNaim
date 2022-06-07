@@ -1,38 +1,47 @@
-import "./Header.css"
-const Header = () => (
+import "./Header.css";
+
+const Header = ({ ProductArr, ViewFilter, setViewFilter }) => {
+  let selectedCategory = "";
+
+  const categories = ProductArr.map((p) => p.category).filter(
+    (value, index, array) => array.indexOf(value) === index
+  );
+  return (
     <nav className="product-filter">
+      <div className="sort">
+        <div className="collection-sort">
+          <label>Filter by:</label>
 
-    <div class="sort">
-            <div class="collection-sort">
-            <label>Filter by:</label>
-            <select>
-                <option value="/">All Jackets</option>
-                <option value="/">2016</option>
-                <option value="/">jacket</option>
-                <option value="/">Jackets</option>
-                <option value="/">layers</option>
-                <option value="/">Obermeyer</option>
-                <option value="/">Roxy</option>
-                <option value="/">womens</option>
-            </select>
-            </div>
+          <select
+            onChange={(e) => {
+              selectedCategory = e.target.value;
+              ViewFilter(selectedCategory);
+            }}
+          >
+            <option>--Choose an option--</option>
+            {categories.map((Category, index) => (
+              <option key={index}>{Category}</option>
 
-            <div class="collection-sort">
-            <label>Sort by:</label>
-            <select>
-                <option value="/">Featured</option>
-                <option value="/">Best Selling</option>
-                <option value="/">Alphabetically, A-Z</option>
-                <option value="/">Alphabetically, Z-A</option>
-                <option value="/">Price, low to high</option>
-                <option value="/">Price, high to low</option>
-                <option value="/">Date, new to old</option>
-                <option value="/">Date, old to new</option>
-            </select>
-            </div>
+            ))}
+          </select>
         </div>
 
+        <div className="collection-sort">
+          <label>Sort by:</label>
+          <select>
+            <option value="/">Featured</option>
+            <option value="/">Best Selling</option>
+            <option value="/">Alphabetically, A-Z</option>
+            <option value="/">Alphabetically, Z-A</option>
+            <option value="/">Price, low to high</option>
+            <option value="/">Price, high to low</option>
+            <option value="/">Date, new to old</option>
+            <option value="/">Date, old to new</option>
+          </select>
+        </div>
+      </div>
     </nav>
   );
 
-  export default Header;
+};
+export default Header;

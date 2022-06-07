@@ -1,8 +1,13 @@
-// import ProductCard from "../cmps/Product/Product.js/ProductCard";
+
 import "./Products.css"
 import ProductCard from "../product/Product";
 
 const Products = ({ProductArr}) => {
+
+
+
+
+
     return (
       <section className="products">
       {ProductArr.map((lowerCasepruduct)=>(
@@ -13,3 +18,5 @@ const Products = ({ProductArr}) => {
   };
 
   export default Products;
+
+  

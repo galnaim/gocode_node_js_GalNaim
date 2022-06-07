@@ -274,20 +274,22 @@ function App() {
   ]);
 
   function ViewFilter(selectedCategory) {
-    const filteredview = Data.filter(
-      (item) => item.category === selectedCategory
-    );
-    setViewFilter(filteredview);
+    const filteredview = Data.filter((item) =>
+      (item.category === selectedCategory))
+      setViewFilter(filteredview);
   }
 
   return (
     <div className="App">
       <h1>Jackets</h1>
-      <Header ProductArr={Data} ViewFilter={ViewFilter} setViewFilter={setViewFilter}/>
+      <Header
+        ProductArr={Data}
+        ViewFilter={ViewFilter}
+        setViewFilter={setViewFilter}
+      />
       <Products ProductArr={Data} />
     </div>
   );
-
 }
 
 export default App;

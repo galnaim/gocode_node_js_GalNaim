@@ -1,11 +1,9 @@
 import "./Header.css";
 
-const Header = ({ ProductArr, ViewFilter, setViewFilter }) => {
-
+const Header = ({ ProductArr, ViewFilter }) => {
   const categories = ProductArr.map((p) => p.category).filter(
-    (value, index, array) => array.indexOf(value) === index  );
-
-
+    (value, index, array) => array.indexOf(value) === index
+  );
 
   return (
     <nav className="product-filter">
@@ -15,16 +13,14 @@ const Header = ({ ProductArr, ViewFilter, setViewFilter }) => {
 
           <select
             onChange={(e) => {
-            let selectedCategory = e.target.value;
+              let selectedCategory = e.target.value;
               ViewFilter(selectedCategory);
             }}
           >
             <option>--Choose an option--</option>
             {categories.map((Category, index) => (
               <option key={index}>{Category}</option>
-
             ))}
-            
           </select>
         </div>
 
@@ -44,6 +40,5 @@ const Header = ({ ProductArr, ViewFilter, setViewFilter }) => {
       </div>
     </nav>
   );
-
 };
 export default Header;

@@ -1,9 +1,7 @@
+import { useEffect } from "react";
 import "./Header.css";
 
-const Header = ({ ProductArr, ViewFilter }) => {
-  const categories = ProductArr.map((p) => p.category).filter(
-    (value, index, array) => array.indexOf(value) === index
-  );
+const Header = ({ categories, ViewFilter , Data, fixedArray}) => {
 
   return (
     <nav className="product-filter">

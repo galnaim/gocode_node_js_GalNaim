@@ -29,7 +29,7 @@
     border-right: 4px solid rgba(255, 255, 255, 0.0);
     animation: spinner .6s linear infinite;
   }
-  
+
   @keyframes spinner {
     to {transform: rotate(360deg);}
   }

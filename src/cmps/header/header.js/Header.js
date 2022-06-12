@@ -1,10 +1,11 @@
-import { useEffect } from "react";
 import "./Header.css";
 
-const Header = ({ categories, ViewFilter , Data, fixedArray}) => {
-
+const Header = ({ categories, ViewFiltered, fetchAgain }) => {
   return (
     <nav className="product-filter">
+
+      {/* <button onClick={fetchAgain}> Fetch Again </button> */}
+
       <div className="sort">
         <div className="collection-sort">
           <label>Filter by:</label>
@@ -12,7 +13,7 @@ const Header = ({ categories, ViewFilter , Data, fixedArray}) => {
           <select
             onChange={(e) => {
               let selectedCategory = e.target.value;
-              ViewFilter(selectedCategory);
+              ViewFiltered(selectedCategory);
             }}
           >
             <option>--Choose an option--</option>

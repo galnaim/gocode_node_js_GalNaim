@@ -1,28 +1,24 @@
-
-import "./Products.css"
+import "./Products.css";
 import ProductCard from "../product/Product";
+// import ProductContext from "../../contexts/ProductContext";
+// import { useContext } from "react";
 
-const Products = ({ProductArr , fixedArray}) => {
-    return (
-      <section className="products">
-        {fixedArray.length>0
-        ?
-      ProductArr.map((lowerCasepruduct)=>(
-       <ProductCard key={lowerCasepruduct.id} id={lowerCasepruduct.id} title={lowerCasepruduct.title} price={lowerCasepruduct.price} image={lowerCasepruduct.image} category={lowerCasepruduct.category}/>
-       ))
-      : 
-      <div class="spinner-examples">
-        <div class="example"> 
-          <span class="smooth spinner" />
-        </div>
-      </div>
-      // <img src="https://shalomhanoch.co.il/wp-content/uploads/2015/08/00263012CBS.jpg" alt="please wait..."/>
-      }
-      
-      </section>
-    );
-  };
-
-  export default Products;
-
+const Products = ({ changeableProductsArray }) => {
   
+  return (
+    <section className="products">
+      {changeableProductsArray.map((item) => (
+        <ProductCard
+          key={item.id}
+          id={item.id}
+          title={item.title}
+          price={item.price}
+          image={item.image}
+          category={item.category}
+        />
+      ))}
+      ;
+    </section>
+  );
+};
+export default Products;

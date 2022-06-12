@@ -2,43 +2,99 @@ import "./App.css";
 import Header from "./cmps/header/header.js/Header";
 import Products from "./cmps/products/Products";
 import { useEffect, useState } from "react";
+import LoadingSpinner from "./cmps/LoadingSpinner/LoadingSpinner";
+import Cart from "./cmps/Cart/Cart";
+import ProductContext from "./contexts/ProductContext";
 
 function App() {
-  useEffect(() => {
-    fetch("https://fakestoreapi.com/products")
-      .then((res) => res.json())
-      .then((InisialProductsArray) => {setData(InisialProductsArray) ; setFixedArray(InisialProductsArray)});
-  }, []);
 
   const [fixedArray, setFixedArray] = useState([]);
-  const [Data, setData] = useState([]);
+  const [changeableProductsArray, setChangeableProductsArray] = useState([]);
+  const [didItLoad, setdidItLoad] = useState([false]);
+  const [CartArray, setCartArray] = useState([]);
 
-  let categories = fixedArray.map((p) => p.category).filter(
-    (value, index, array) => array.indexOf(value) === index
-  );
+  useEffect(() => {
+    fetch("https://fakestoreapi.com/products")
+      .then((resi) => resi.json())
+      .then((InisialProductsArray) => {
+        setChangeableProductsArray(InisialProductsArray);
+        setFixedArray(InisialProductsArray);
+        setdidItLoad(true);
+      });
+  }, []);
 
-  function ViewFilter(selectedCategory) {
+  // function fetchAgain() {
+  //   setdidItLoad(false);
+  //   fetch("https://fakestoreapi.com/products")
+  //     .then((resi) => resi.json())
+  //     .then((InisialProductsArray) => {
+  //       setChangeableProductsArray(InisialProductsArray);
+  //       setFixedArray(InisialProductsArray);
+  //       setdidItLoad(true);
+  //     });
+  // }
+
+  let categories = fixedArray
+    .map((p) => p.category)
+    .filter((value, index, array) => array.indexOf(value) === index);
+
+  function ViewFiltered(selectedCategory) {
     const filteredview = fixedArray.filter((item) =>
       item.category === selectedCategory
         ? item.category
         : selectedCategory === "--Choose an option--"
     );
-    setData(filteredview);
+    setChangeableProductsArray(filteredview);
   }
 
+  function addToCart(id) {
+    const increasingCartArray = ([...CartArray, fixedArray.filter((item)=>(
+      item.id === id))]);
+    setCartArray(increasingCartArray);
+  }
+
+function removeFromCart(id){
+  const decreasingCartArray = CartArray.filter((product)=>product.id!==id);
+  console.log(decreasingCartArray);
+  setCartArray(decreasingCartArray);
+}
+
   return (
-    <div className="App">
-      {/* <Button/> */}
+    <ProductContext.Provider
+      value={{
+        fixedArray: fixedArray,
+        CartArray: CartArray,
+        setCartArray: setCartArray,
+        addToCart: addToCart,
+        removeFromCart: removeFromCart
+      }}
+    >
+      {didItLoad ?
+
+      
+      <>
       <h1>Jackets</h1>
-      <Header
-        Data={Data}
-        ViewFilter={ViewFilter}
-        setData={setData}
-        categories={categories}
-        fixedArray={fixedArray}
-      />
-      <Products ProductArr={Data} fixedArray={fixedArray}/>
-    </div>
+
+      <Cart />
+      <LoadingSpinner/>
+      <div className="App">
+        
+          <Header
+            ViewFiltered={ViewFiltered}
+            categories={categories}
+            // fetchAgain={fetchAgain}
+          />
+          <Products
+            changeableProductsArray={changeableProductsArray}
+            didItLoad={didItLoad}
+          />
+        </div>
+      </>
+      :
+      <img src="https://upload.wikimedia.org/wikipedia/he/thumb/f/f1/Mossad.JPG/450px-Mossad.JPG" alt="dfg"/>
+            // <LoadingSpinner/>
+}
+</ProductContext.Provider>
   );
 }
 export default App;

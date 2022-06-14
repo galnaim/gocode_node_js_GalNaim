@@ -1,10 +1,9 @@
+import React from "react";
 import "./Header.css";
 
-const Header = ({ categories, ViewFiltered, fetchAgain }) => {
+const Header = ({ categories, ViewFiltered}) => {
   return (
     <nav className="product-filter">
-
-      {/* <button onClick={fetchAgain}> Fetch Again </button> */}
 
       <div className="sort">
         <div className="collection-sort">

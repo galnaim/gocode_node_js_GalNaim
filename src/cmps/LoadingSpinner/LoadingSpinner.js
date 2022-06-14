@@ -1,11 +1,13 @@
 import "./LoadingSpinner.css";
+import React from "react";
 
-const LoadingSpinner = ()=>{
-
-<div class="spinner-examples">
-    <div class="example">
-        <span class="smooth spinner" />
+const LoadingSpinner = () => {
+  return (
+    <div className="spinner-examples">
+      <div className="example">
+        <span className="smooth spinner" />
+      </div>
     </div>
-</div>
-}
+  );
+};
 export default LoadingSpinner;

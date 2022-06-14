@@ -1,24 +1,31 @@
 import "./Product.css";
-import { useContext, useRef } from "react";
+import React, { useContext } from "react";
 import ProductContext from "../../contexts/ProductContext";
+import { Link, Route, Routes, useParams } from "react-router-dom";
 
 const ProductCard = ({ title, image, price, category, id }) => {
-// const counter = useRef(0);
-const {addToCart} = useContext(ProductContext)
-
+  const { addToCart } = useContext(ProductContext);
+  
   return (
     <div className="product-card">
+      <Link to={`/ProductDetails/${id}`}>
       <div className="product-image">
-        <img src={image} width="100px" alt="Sorry, No Pic..." />
+        <img src={image} width="90px" alt="Sorry, No Pic..." />
       </div>
+</Link>
       <div className="product-info">
         <h5>{title}</h5>
         <h6>{price}</h6>
-        <button
-          onClick={() => {
-            addToCart(id);}}>{" "}+{" "}
-        </button>
         <h6>{category}</h6>
+      </div>
+      
+      <div className="addButton">
+        <button
+          onClick={() => { addToCart(id);        }}
+        >
+          {" "}
+          +{" "}
+        </button>
       </div>
     </div>
   );

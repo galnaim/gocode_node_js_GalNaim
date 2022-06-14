@@ -1,43 +1,88 @@
-// import Header from "./cmps/header/header.js/Header";
-// import React from "react"
-// import Products from "../cmps/products/Products"
-// import {useContext} from "react";
-// import Cart from "../cmps/Cart/Cart";
+// import FromApp from "../contexts/FromApp"
+import Header from "../cmps/header/header.js/Header";
+import ProductContext from "../contexts/ProductContext";
+import Cart from "../cmps/Cart/Cart";
+import LoadingSpinner from "../cmps/LoadingSpinner/LoadingSpinner";
+import React, { useEffect, useState, useContext } from "react";
+import Products from "../cmps/products/Products";
+import { Link } from "react-router-dom";
 
-// const fixedArray = useContext(fixedArray);
-// const setChangeableProductsArray = useContext(setChangeableProductsArray);
-// const CartArray = useContext(CartArray);
-// const setCartArray = useContext(setCartArray);
-// const changeableProductsArray = useContext(changeableProductsArray);
-// const didItLoad = useContext(didItLoad);
+function Home() {
+  const [fixedArray, setFixedArray] = useState([]);
+  const [changeableProductsArray, setChangeableProductsArray] = useState([]);
+  const [didItLoad, setdidItLoad] = useState([false]);
+  const [CartArray, setCartArray] = useState([]);
 
-// function Home() {
+  // const { addToCart } = useContext(FromApp);
 
-//   function ViewFiltered(selectedCategory) {
-//     const filteredview = fixedArray.filter((item) =>
-//       item.category === selectedCategory
-//         ? item.category
-//         : selectedCategory === "--Choose an option--"
-//     );
-    // setChangeableProductsArray(filteredview);
-//   }
+  useEffect(() => {
+    fetch("https://fakestoreapi.com/products")
+      .then((resi) => resi.json())
+      .then((InisialProductsArray) => {
+        setChangeableProductsArray(InisialProductsArray);
+        setFixedArray(InisialProductsArray);
+        setdidItLoad(true);
+      });
+  }, []);
 
-//   return (
-//     <React.Fragment>
-      {/* //   {didItLoad ?  */}(<h1>Jackets</h1>
-      // <Cart />
-      // <div className="App">
-      //   <Header ViewFiltered={ViewFiltered} categories={categories} />
-      //   <Products
-      //     changeableProductsArray={changeableProductsArray}
-      //     didItLoad={didItLoad}
-      //   />
-      // </div>
-      ){/* //    : (
-            // <LoadingSpinner />
-        //   ) */}
-    // </React.Fragment>
-  // );
-// }
+  let categories = fixedArray
+    .map((p) => p.category)
+    .filter((value, index, array) => array.indexOf(value) === index);
 
-// export default Home;
+  function ViewFiltered(selectedCategory) {
+    const filteredview = fixedArray.filter((item) =>
+      item.category === selectedCategory
+        ? item.category
+        : selectedCategory === "--Choose an option--"
+    );
+    setChangeableProductsArray(filteredview);
+  }
+
+  function addToCart(id) {
+    let increasingCartArray = [
+      ...CartArray,
+      fixedArray.find(function (item) {
+        return item.id === id;
+      }),
+    ];
+    setCartArray(increasingCartArray);
+  }
+
+  function removeFromCart(id) {
+    let decreasingCartArray = CartArray.filter(function (product) {
+      return product.id !== id;
+    });
+    setCartArray(decreasingCartArray);
+  }
+
+  
+return (
+
+    <ProductContext.Provider
+      value={{
+        fixedArray: fixedArray,
+        CartArray: CartArray,
+        setCartArray: setCartArray,
+        addToCart: addToCart,
+        removeFromCart: removeFromCart,
+      }} >
+      {didItLoad === true ? (
+        <>
+          <h1>Jackets</h1>
+          <Cart />
+          <div className="App">
+            <Header ViewFiltered={ViewFiltered} categories={categories} />
+            <Products
+              changeableProductsArray={changeableProductsArray}
+              fixedArray={fixedArray}
+            />
+            <Link className="aboutLink" to="/about">about</Link>
+          </div>
+        </>
+      ) : (
+        <LoadingSpinner />
+      )}
+    </ProductContext.Provider>
+  );
+}
+export default Home;

@@ -23,4 +23,17 @@ body {
   font-family: "Roboto", sans-serif;
   background-color: #f6f6f6;
 }
+.aboutLink{
+  display: flex;
+  justify-content: center ;
+}
+.homeLink{
+  display: flex;
+  justify-content: center ;
+}
+.details{
+  display: flex;
+  justify-content: center ;
+  flex-direction: column;
+}
 /* export default App.css; */

@@ -1,16 +1,16 @@
 // import FromApp from "../contexts/FromApp"
-import Header from "../cmps/header/header.js/Header";
+import Header from "../cmps/header/Header";
 import ProductContext from "../contexts/ProductContext";
 import Cart from "../cmps/Cart/Cart";
 import LoadingSpinner from "../cmps/LoadingSpinner/LoadingSpinner";
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import Products from "../cmps/products/Products";
 import { Link } from "react-router-dom";
 
 function Home() {
   const [fixedArray, setFixedArray] = useState([]);
   const [changeableProductsArray, setChangeableProductsArray] = useState([]);
-  const [didItLoad, setdidItLoad] = useState([false]);
+  const [didItLoad, setdidItLoad] = useState(false);
   const [CartArray, setCartArray] = useState([]);
 
   // const { addToCart } = useContext(FromApp);
@@ -55,9 +55,11 @@ function Home() {
     setCartArray(decreasingCartArray);
   }
 
-  
-return (
+  function emptyCart() {
+    setCartArray([]);
+  }
 
+  return (
     <ProductContext.Provider
       value={{
         fixedArray: fixedArray,
@@ -65,7 +67,9 @@ return (
         setCartArray: setCartArray,
         addToCart: addToCart,
         removeFromCart: removeFromCart,
-      }} >
+        emptyCart:emptyCart,
+      }}
+    >
       {didItLoad === true ? (
         <>
           <h1>Jackets</h1>
@@ -76,7 +80,9 @@ return (
               changeableProductsArray={changeableProductsArray}
               fixedArray={fixedArray}
             />
-            <Link className="aboutLink" to="/about">about</Link>
+            <Link className="aboutLink" to="/about">
+              about
+            </Link>
           </div>
         </>
       ) : (

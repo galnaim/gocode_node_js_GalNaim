@@ -31,7 +31,7 @@ export default function ProductDetails() {
           <div className="details">
             <h1>{productObj.title}</h1>
             <div>
-              <img src={productObj.image} width="150px" alt="Sorry, No Pic" />
+              <img src={productObj.image} width="250px" alt={productObj.title} />
             </div>
             <h6>{productObj.price}</h6>
             <div>{productObj.description}</div>
@@ -42,7 +42,7 @@ export default function ProductDetails() {
               // }}
               >
                 {" "}
-                (Comming: AddToCart){" "}
+                (Comming Later: AddToCart){" "}
               </button>
             </div>
           </div>

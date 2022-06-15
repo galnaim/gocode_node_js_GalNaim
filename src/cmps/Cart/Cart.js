@@ -3,25 +3,29 @@ import ProductContext from "../../contexts/ProductContext";
 import "./Cart.css";
 
 const Cart = () => {
-  const { CartArray, removeFromCart } = useContext(ProductContext);
+  const { CartArray, removeFromCart, emptyCart } = useContext(ProductContext);
   return (
     <div className="Cart">
+
       <h3>Cart</h3>
       {CartArray.map((item) => (
-        <>
-          <li key={item.id} id={item.id} value={item.title}>
+        <React.Fragment key={item.id}>
+          <div id={item.id} value={item.title}>
             {item.title}
-          </li>
+          </div>
           <button
-            key={item.id}
             id={item.id}
             value={item.title}
             onClick={() => removeFromCart(item.id)}
           >
             Remove From Cart{" "}
           </button>
-        </>
+        </React.Fragment>
+                  
       ))}
+      <button onClick={() => emptyCart()}>
+            Empty Cart
+          </button>
     </div>
   );
 };

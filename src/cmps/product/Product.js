@@ -1,11 +1,12 @@
 import "./Product.css";
 import React, { useContext } from "react";
 import ProductContext from "../../contexts/ProductContext";
-import { Link, Route, Routes, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
+import Rating from "@mui/material/Rating";
 
 const ProductCard = ({ title, image, price, category, id }) => {
-  
-const { addToCart } = useContext(ProductContext);
+  const [value, setValue] = React.useState(2);
+  const { addToCart } = useContext(ProductContext);
 
   return (
     <div className="product-card">
@@ -28,14 +29,19 @@ const { addToCart } = useContext(ProductContext);
           }}
         >
           {" "}
-          +{" "}
+          Add To Cart{" "}
         </button>
+        <br />
+        {/* <Rating
+          max={10}
+          name="simple-controlled"
+          value={value}
+          onChange={(event, newValue) => {
+            setValue(newValue);
+          }}
+        /> */}
       </div>
     </div>
   );
 };
 export default ProductCard;
-
-{
-  /* <Link to="/ProductDetails">details</Link> */
-}

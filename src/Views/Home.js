@@ -1,4 +1,3 @@
-// import FromApp from "../contexts/FromApp"
 import Header from "../cmps/header/Header";
 import ProductContext from "../contexts/ProductContext";
 import Cart from "../cmps/Cart/Cart";
@@ -12,16 +11,21 @@ function Home() {
   const [changeableProductsArray, setChangeableProductsArray] = useState([]);
   const [didItLoad, setdidItLoad] = useState(false);
   const [CartArray, setCartArray] = useState([]);
-
-  // const { addToCart } = useContext(FromApp);
+  const [value, setValue] = React.useState([]);
+  const [extremePrices, setExtremePrices] = useState();
 
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
       .then((resi) => resi.json())
-      .then((InisialProductsArray) => {
-        setChangeableProductsArray(InisialProductsArray);
-        setFixedArray(InisialProductsArray);
+      .then((InitialProductsArray) => {
+        setChangeableProductsArray(InitialProductsArray);
+        setFixedArray(InitialProductsArray);
         setdidItLoad(true);
+        findExtremePrices(InitialProductsArray);
+      })
+      .catch(function () {
+        <h1>No Answer from Server</h1>;
+        console.log("Error");
       });
   }, []);
 
@@ -37,6 +41,30 @@ function Home() {
     );
     setChangeableProductsArray(filteredview);
   }
+
+  function findExtremePrices(arr) {
+    const sortPrices = arr.sort(function (a, b) {
+      if (a.price > b.price) {
+        return 1;
+      } else if (a.price < b.price) {
+        return -1;
+      } else {
+        return 0;
+      }
+    });
+    setExtremePrices([sortPrices[0], sortPrices[sortPrices.length - 1]]);
+    setValue([sortPrices[0].price, sortPrices[sortPrices.length - 1].price]);
+  }
+  
+    // function adjustFilteredBySlide(value){
+    //   let viewFilterBySlide = fixedArray.slice([value]);
+    //   setChangeableProductsArray(viewFilterBySlide)
+    // } ;
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+    adjustFilteredBySlide(newValue)
+  };
 
   function addToCart(id) {
     let increasingCartArray = [
@@ -67,7 +95,7 @@ function Home() {
         setCartArray: setCartArray,
         addToCart: addToCart,
         removeFromCart: removeFromCart,
-        emptyCart:emptyCart,
+        emptyCart: emptyCart,
       }}
     >
       {didItLoad === true ? (
@@ -75,7 +103,14 @@ function Home() {
           <h1>Jackets</h1>
           <Cart />
           <div className="App">
-            <Header ViewFiltered={ViewFiltered} categories={categories} />
+            <Header
+              handleChange={handleChange}
+              ViewFiltered={ViewFiltered}
+              categories={categories}
+              fixedArray={fixedArray}
+              leastExpensiveObj={extremePrices[0].price}
+              mostExpensiveObj={extremePrices[1].price}
+            />
             <Products
               changeableProductsArray={changeableProductsArray}
               fixedArray={fixedArray}

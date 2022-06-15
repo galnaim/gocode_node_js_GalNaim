@@ -5,14 +5,13 @@ import { Link } from "react-router-dom";
 import Rating from "@mui/material/Rating";
 
 const ProductCard = ({ title, image, price, category, id }) => {
-  const [value, setValue] = React.useState(2);
   const { addToCart } = useContext(ProductContext);
 
   return (
     <div className="product-card">
       <Link to={`/Products/${id}`}>
         <div className="product-image">
-          <img src={image} width="90px" alt="Sorry, No Pic..." />
+          <img src={image} width="90px" alt={title} />
         </div>
         <div className="product-info">
           <h5>{title}</h5>

@@ -1,10 +1,12 @@
 import "./Products.css";
 import ProductCard from "../product/Product";
-import React from "react";
+import HeadertoProducts from "../../contexts/HeaderToHome";
+import React, { useContext } from "react";
 // import ProductContext from "../../contexts/ProductContext";
 // import { useContext } from "react";
 
 const Products = ({ changeableProductsArray }) => {
+
   return (
     <div>
       <section className="products">

@@ -1,27 +1,38 @@
 import "./Header.css";
 import Slider from "@mui/material/Slider";
 import { Box } from "@mui/system";
-import React, { useState } from "react";
+// import React, { useState } from "react";
 // import ProductContext from "../../contexts/ProductContext";
 
-function valuetext(value) {
-  return `${value}°C`;
-}
+const Header = ({
+  categories,
+  ViewFiltered,
+  value,
+  setValue,
+  mostExpensiveObj,
+  leastExpensiveObj,
+  adjustFiltereBySlide
+}) => {
+  function valuetext(value) {
+    return `${value}Dollars`;
+  } //translates the value to numbers for the user
 
-const Header = ({ categories, ViewFiltered, handleChange,value, mostExpensiveObj, leastExpensiveObj}) => {
-  
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+    adjustFiltereBySlide(value)
+  }; // seting the value
 
   return (
     <nav className="product-filter">
-      <Box sx={{ width: 250, margin: 5 }}>
+      <Box sx={{ width: 300 }}>
         <Slider
-          max={mostExpensiveObj}
-          min={leastExpensiveObj}
-          getAriaLabel={() => "Price range"} //Accepts a function which returns a string value that provides a user-friendly name for the thumb labels of the slider. This is important for screen reader users.
-          value={value} //The value of the slider. For ranged sliders, provide an array with two values.
-          onChange={handleChange}
-          valueLabelDisplay="auto" //Controls when the value label is displayed:- auto the value label will display when the thumb is hovered or focused. - on will display persistently. - off will never display.
-          getAriaValueText={valuetext} //funktzia, Accepts a function which returns a string value that provides a user-friendly name for the current value of the slider. This is important for screen reader users.
+          min={leastExpensiveObj} //The maximum allowed value of the slider.
+          max={mostExpensiveObj} //The minimum allowed value of the slider.
+          getAriaLabel={() => "Temperature range"} //translat the thumb labels of the slider for the user.
+          value={value} //The value of the slider.  provide an array with two values.
+          onChange={handleChange} // listening to the change and activating the func that sets the value.
+          valueLabelDisplay="auto"
+          getAriaValueText={valuetext} // activates the func that translates the value to numbers for the user
         />
       </Box>
       <div className="sort">

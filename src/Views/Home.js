@@ -11,7 +11,7 @@ function Home() {
   const [changeableProductsArray, setChangeableProductsArray] = useState([]);
   const [didItLoad, setdidItLoad] = useState(false);
   const [CartArray, setCartArray] = useState([]);
-  const [value, setValue] = React.useState([]);
+  const [value, setValue] = useState([100, 900]);
   const [extremePrices, setExtremePrices] = useState();
 
   useEffect(() => {
@@ -22,6 +22,7 @@ function Home() {
         setFixedArray(InitialProductsArray);
         setdidItLoad(true);
         findExtremePrices(InitialProductsArray);
+        // setValue(extremePrices);
       })
       .catch(function () {
         <h1>No Answer from Server</h1>;
@@ -53,18 +54,17 @@ function Home() {
       }
     });
     setExtremePrices([sortPrices[0], sortPrices[sortPrices.length - 1]]);
-    setValue([sortPrices[0].price, sortPrices[sortPrices.length - 1].price]);
   }
-  
-    // function adjustFilteredBySlide(value){
-    //   let viewFilterBySlide = fixedArray.slice([value]);
-    //   setChangeableProductsArray(viewFilterBySlide)
-    // } ;
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-    adjustFilteredBySlide(newValue)
-  };
+  function adjustFiltereBySlide(valueFromSlide) {
+    let viewFilterBySlide = fixedArray.filter(function (item) {
+      if (valueFromSlide[0] < item.price && item.price < valueFromSlide[1])
+        return true;
+      else return false;
+    });
+    setChangeableProductsArray(viewFilterBySlide);
+    console.log("viewFilterBySlide", viewFilterBySlide);
+  }
 
   function addToCart(id) {
     let increasingCartArray = [
@@ -104,12 +104,14 @@ function Home() {
           <Cart />
           <div className="App">
             <Header
-              handleChange={handleChange}
               ViewFiltered={ViewFiltered}
               categories={categories}
               fixedArray={fixedArray}
+              setValue={setValue}
+              value={value}
               leastExpensiveObj={extremePrices[0].price}
               mostExpensiveObj={extremePrices[1].price}
+              adjustFiltereBySlide={adjustFiltereBySlide}
             />
             <Products
               changeableProductsArray={changeableProductsArray}

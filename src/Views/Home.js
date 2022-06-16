@@ -5,7 +5,8 @@ import LoadingSpinner from "../cmps/LoadingSpinner/LoadingSpinner";
 import React, { useEffect, useState } from "react";
 import Products from "../cmps/products/Products";
 import { Link } from "react-router-dom";
-
+import  MyButton from "../cmps/Button/Button";
+import { Button } from "@mui/material";
 function Home() {
   const [fixedArray, setFixedArray] = useState([]);
   const [changeableProductsArray, setChangeableProductsArray] = useState([]);
@@ -98,6 +99,9 @@ function Home() {
         emptyCart: emptyCart,
       }}
     >
+      {/* <MyButton variant='text' color='red' size='20px' />
+      <br />
+      <Button variant='outlined' color='error' size='large' >MUI HELLO!</Button> */}
       {didItLoad === true ? (
         <>
           <h1>Jackets</h1>

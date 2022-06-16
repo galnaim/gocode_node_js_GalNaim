@@ -23,6 +23,7 @@ const Cart = () => {
         </React.Fragment>
                   
       ))}
+      <br/>
       <button onClick={() => emptyCart()}>
             Empty Cart
           </button>

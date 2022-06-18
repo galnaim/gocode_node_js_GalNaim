@@ -11,7 +11,7 @@ const Header = ({
   setValue,
   mostExpensiveObj,
   leastExpensiveObj,
-  adjustFiltereBySlide
+  adjustFiltereBySlide,
 }) => {
   function valuetext(value) {
     return `${value}Dollars`;
@@ -19,15 +19,16 @@ const Header = ({
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
-    adjustFiltereBySlide(value)
+    adjustFiltereBySlide(value);
   }; // seting the value
+
 
   return (
     <nav className="product-filter">
       <Box sx={{ width: 300 }}>
         <Slider
-          min={leastExpensiveObj} //The maximum allowed value of the slider.
-          max={mostExpensiveObj} //The minimum allowed value of the slider.
+          min={Math.floor(leastExpensiveObj)} //The maximum allowed value of the slider.
+          max={Math.ceil(mostExpensiveObj)} //The minimum allowed value of the slider.
           getAriaLabel={() => "Temperature range"} //translat the thumb labels of the slider for the user.
           value={value} //The value of the slider.  provide an array with two values.
           onChange={handleChange} // listening to the change and activating the func that sets the value.

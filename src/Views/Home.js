@@ -59,7 +59,7 @@ function Home() {
 
   function adjustFiltereBySlide(valueFromSlide) {
     let viewFilterBySlide = fixedArray.filter(function (item) {
-      if (valueFromSlide[0] < item.price && item.price < valueFromSlide[1])
+      if (valueFromSlide[0] <= item.price && item.price <= valueFromSlide[1])
         return true;
       else return false;
     });

@@ -1,3 +1,6 @@
 .Cart {
   border-color: black, solid, 2px;
 }
+.itemQty{
+  border: 1px orange solid;
+}

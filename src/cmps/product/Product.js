@@ -4,6 +4,7 @@ import ProductContext from "../../contexts/ProductContext";
 import { Link } from "react-router-dom";
 import Rating from "@mui/material/Rating";
 
+
 const ProductCard = ({ title, image, price, category, id }) => {
   const { addToCart } = useContext(ProductContext);
 
@@ -21,12 +22,12 @@ const ProductCard = ({ title, image, price, category, id }) => {
         <h6>{price}</h6>
         <h6>{category}</h6>
       </div>
-      <div className="addButton">
-        <button
+      <div className="addButtondiv">
+        <button className="addButton" 
           onClick={() => {
             addToCart(id);
           }}
-        >
+          >
           {" "}
           Add To Cart{" "}
         </button>

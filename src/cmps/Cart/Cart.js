@@ -10,8 +10,8 @@ const Cart = () => {
       <h3>Cart</h3>
       {CartArray.map((item) => (
         <React.Fragment key={item.id}>
-          <div id={item.id} value={item.title}>
-            {item.title}
+          <div id={item.id} value={item.title} qty={item.qty}>
+            {item.title}. <span className="itemQty">{item.qty}</span>
           </div>
           <button
             id={item.id}

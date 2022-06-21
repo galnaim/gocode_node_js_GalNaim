@@ -68,13 +68,28 @@ function Home() {
   }
 
   function addToCart(id) {
-    let increasingCartArray = [
-      ...CartArray,
-      fixedArray.find(function (item) {
+    const product = CartArray.find(function (item) {
+      return item.id === id;
+    });
+
+    if (product !== undefined) {
+      const newCartArray = CartArray.map( prod =>{
+        if(prod.id === id){
+          return {
+            ...prod,
+            qty: prod.qty + 1
+          }
+        }
+        return prod
+      })
+      setCartArray(newCartArray);
+
+    } else {
+      const initialProduct = fixedArray.find(function (item) {
         return item.id === id;
-      }),
-    ];
-    setCartArray(increasingCartArray);
+      });
+      setCartArray([...CartArray, { ...initialProduct, qty: 1 }]);
+    }
   }
 
   function removeFromCart(id) {
@@ -87,6 +102,8 @@ function Home() {
   function emptyCart() {
     setCartArray([]);
   }
+
+  // useEffect(()=> console.log('CartArray', CartArray),[CartArray])
 
   return (
     <ProductContext.Provider

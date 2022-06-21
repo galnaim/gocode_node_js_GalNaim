@@ -73,17 +73,16 @@ function Home() {
     });
 
     if (product !== undefined) {
-      const newCartArray = CartArray.map( prod =>{
-        if(prod.id === id){
+      const newCartArray = CartArray.map((prod) => {
+        if (prod.id === id) {
           return {
             ...prod,
-            qty: prod.qty + 1
-          }
+            qty: prod.qty + 1,
+          };
         }
-        return prod
-      })
+        return prod;
+      });
       setCartArray(newCartArray);
-
     } else {
       const initialProduct = fixedArray.find(function (item) {
         return item.id === id;

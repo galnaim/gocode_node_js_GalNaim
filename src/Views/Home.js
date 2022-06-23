@@ -17,7 +17,7 @@ function Home() {
 
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
-      .then((resi) => resi.json())
+      .then((res) => res.json())
       .then((InitialProductsArray) => {
         setChangeableProductsArray(InitialProductsArray);
         setFixedArray(InitialProductsArray);
@@ -64,7 +64,6 @@ function Home() {
       else return false;
     });
     setChangeableProductsArray(viewFilterBySlide);
-    console.log("viewFilterBySlide", viewFilterBySlide);
   }
 
   function addToCart(id) {
@@ -92,10 +91,29 @@ function Home() {
   }
 
   function removeFromCart(id) {
-    let decreasingCartArray = CartArray.filter(function (product) {
-      return product.id !== id;
+    let decreasingCartArray = CartArray.find(function (product) {
+      return product.id === id;
     });
-    setCartArray(decreasingCartArray);
+    if (decreasingCartArray && decreasingCartArray.qty === 1) {
+      setCartArray(
+        CartArray.filter(function (product) {
+          return product.id !== id;
+        })
+      );
+    } 
+    
+    else if (decreasingCartArray) {
+      setCartArray(
+        CartArray.map(function (product) {
+          if (product.id !== id){return product}
+          else {return {...product, qty: (product.qty -1)}}
+          })
+        )
+    } 
+    
+    else {
+      setCartArray(CartArray);
+    }
   }
 
   function emptyCart() {
@@ -134,6 +152,7 @@ function Home() {
             <Products
               changeableProductsArray={changeableProductsArray}
               fixedArray={fixedArray}
+              CartArray={CartArray}
             />
             <Link className="aboutLink" to="/about">
               about

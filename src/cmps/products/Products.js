@@ -5,8 +5,7 @@ import React, { useContext } from "react";
 // import ProductContext from "../../contexts/ProductContext";
 // import { useContext } from "react";
 
-const Products = ({ changeableProductsArray }) => {
-
+const Products = ({ CartArray, changeableProductsArray }) => {
   return (
     <div>
       <section className="products">
@@ -24,4 +23,5 @@ const Products = ({ changeableProductsArray }) => {
     </div>
   );
 };
+
 export default Products;

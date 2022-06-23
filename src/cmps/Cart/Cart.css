@@ -1,6 +1,11 @@
 .Cart {
   border-color: black, solid, 2px;
 }
-.itemQty{
+.itemQty {
   border: 1px orange solid;
+}
+.emptyCartBTN {
+  margin-top: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
 }

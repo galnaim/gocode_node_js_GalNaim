@@ -3,16 +3,16 @@ import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
 import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-import { useContext } from 'react';
-import ProductContext from '../../contexts/ProductContext';
-
+// import Divider from '@mui/material/Divider';
+// import ListItem from '@mui/material/ListItem';
+// import ListItemButton from '@mui/material/ListItemButton';
+// import ListItemIcon from '@mui/material/ListItemIcon';
+// import ListItemText from '@mui/material/ListItemText';
+// import InboxIcon from '@mui/icons-material/MoveToInbox';
+// import MailIcon from '@mui/icons-material/Mail';
+// import { useContext } from 'react';
+// import ProductContext from '../../contexts/ProductContext';
+import Cart from '../Cart/Cart';
 
 export default function TemporaryDrawer() {
   const [state, setState] = React.useState({
@@ -30,7 +30,7 @@ export default function TemporaryDrawer() {
     setState({ ...state, [anchor]: open });
   };
 
-  const { CartArray, removeFromCart, emptyCart } = useContext(ProductContext);
+  // const { CartArray, removeFromCart, emptyCart } = useContext(ProductContext);
 
   const list = (anchor) => (
     <Box
@@ -39,7 +39,8 @@ export default function TemporaryDrawer() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-      {CartArray.map((item) => (
+<Cart/>
+      {/* {CartArray.map((item) => (
         <React.Fragment key={item.id}>
           <div id={item.id} value={item.title}>
             {item.title}
@@ -53,16 +54,16 @@ export default function TemporaryDrawer() {
           </button>
         </React.Fragment>
                   
-      ))}
+      ))} */}
 
 
       </List>
-      <Divider />
+      {/* <Divider />
       <List>
       <button onClick={() => emptyCart()}>
             Empty Cart
           </button>
-       </List>
+       </List> */}
     </Box>
   );
 

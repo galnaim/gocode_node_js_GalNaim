@@ -1,12 +1,13 @@
 import React, { useContext } from "react";
 import ProductContext from "../../contexts/ProductContext";
 import "./Cart.css";
+import Divider from "@mui/material/Divider";
 
 const Cart = () => {
   const { CartArray, removeFromCart, emptyCart } = useContext(ProductContext);
+
   return (
     <div className="Cart">
-
       <h3>Cart</h3>
       {CartArray.map((item) => (
         <React.Fragment key={item.id}>
@@ -21,12 +22,9 @@ const Cart = () => {
             Remove From Cart{" "}
           </button>
         </React.Fragment>
-                  
       ))}
-      <br/>
-      <button onClick={() => emptyCart()}>
-            Empty Cart
-          </button>
+      <Divider />
+      <button className="emptyCartBTN" onClick={() => emptyCart()}>Empty Cart</button>
     </div>
   );
 };

@@ -2,8 +2,10 @@ import "./Product.css";
 import React, { useContext } from "react";
 import ProductContext from "../../contexts/ProductContext";
 import { Link } from "react-router-dom";
-// import Rating from "@mui/material/Rating";
-// import Cart from "../Cart/Cart";
+import Card from "@mui/material/Card";
+import { CardHeader, CardMedia, Paper } from "@mui/material";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
 
 const ProductCard = ({ title, image, price, category, id }) => {
   const { CartArray, addToCart } = useContext(ProductContext);
@@ -13,68 +15,59 @@ const ProductCard = ({ title, image, price, category, id }) => {
   });
 
   return (
-    <div className="product-card">
-      <Link to={`/Products/${id}`}>
-        <div className="product-image">
-          <img src={image} width="90px" alt={title} />
-        </div>
-        <div className="product-info">
-          <h5>{title}</h5>
-        </div>
+    <Card elevation={10} sx={{ maxWidth: 200 , margin: 0.3 }} >
+           <Link to={`/Products/${id}`}>
+      <CardHeader title={title} subheader={category}/>
       </Link>
-      <div className="product-info">
-        <h6>{price}</h6>
-        <h6>{category}</h6>
-      </div>
-      <div className="addButtondiv">
-        {isInCart ? (
-          <div>
-          <button
-            className="addButton"
-            onClick={() => {
-              addToCart(id);
-            }}
-          >
-            {" "}
-            Add More To Cart{" "}
-          </button>
-          <div>{isInCart.qty} are in your cart</div>
-          </div>
-        ) : (
-          <div>
-          <button
-            className="addButton"
-            onClick={() => {
-              addToCart(id);
-            }}
-          >
-            {" "}
-            Add To Cart{" "}
-          </button>
-          <div>0 are in your cart</div>
-          </div>
-        )}
 
-        {/* <button
-          className="addButton"
-          onClick={() => {
-            addToCart(id);
-          }}
-        >
-          {" "}
-          Add To Cart{" "}
-        </button> */}
-        <br />
-        {/* <Rating
-          max={10}
-          name="simple-controlled"
-          value={value}
-          onChange={(event, newValue) => {
-            setValue(newValue);
-          }}
-        /> */}
+      <div className="product-card">
+
+      <Link to={`/Products/${id}`}>
+          <CardMedia component="img" height="150" image={image} alt={title} />
+
+          <div className="product-info"></div>
+        </Link>
+        <CardContent className="ABC">
+          <Typography className="DEF">
+        <div className="product-info">
+          <h6>Price: {price} $</h6>
+        </div>
+        <div className="addButtondiv">
+          {isInCart ? (
+            <div className="toCenter">
+              <button
+                className="addButton"
+                onClick={() => {
+                  addToCart(id);
+                }}
+              >
+                {" "}
+                Add More To Cart{" "}
+              </button>
+              <div>{isInCart.qty} are in your cart</div>
+            </div>
+          ) : (
+            <div className="toCenter">
+              <button
+                className="addButton"
+                onClick={() => {
+                  addToCart(id);
+                }}
+              >
+                {" "}
+                Add To Cart{" "}
+              </button>
+              <div>0 are in your cart</div>
+            </div>
+          )}
+
+          <br />
+          
+        </div>
+        </Typography>
+      </CardContent>
       </div>
-    </div>
+    </Card>
   );
 };
 export default ProductCard;

@@ -1,6 +1,6 @@
 import "./App.css";
-import React, { useEffect, useState, useContext } from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import React from "react";
+import { Routes, Route } from "react-router-dom";
 import ProductDetails from "./Views/ProductDetails";
 import About from "./Views/About";
 import Home from "./Views/Home";

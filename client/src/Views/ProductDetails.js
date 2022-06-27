@@ -11,13 +11,13 @@ import CardActions from "@mui/material/CardActions";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import FavoriteIcon from "@mui/icons-material/Favorite";
+
 import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
+
 import ExpandMore from "@mui/icons-material/ExpandMore";
 // import CardActionArea from "@mui/material/CardActionArea";
-import { positions } from '@mui/system';
+
 
 
 export default function ProductDetails({ expanded, handleExpandClick }) {
@@ -34,7 +34,7 @@ export default function ProductDetails({ expanded, handleExpandClick }) {
         setproductObj(productObj);
         setisItLoading(false);
       });
-  }, []);
+  }, [dynamicProductID]);
 
   return (
     
@@ -107,21 +107,3 @@ export default function ProductDetails({ expanded, handleExpandClick }) {
     )
   );
 }
-
-{/* 
-// <>
-        //   <div>
-        //     <h1>{productObj.title}</h1>
-        //     <div>
-        //       <img */}
-        {/* //         src={productObj.image} */}
-        {/* //         width="250px" */}
-        {/* //         alt={productObj.title} */}
-        {/* //       /> */}
-        {/* //     </div> */}
-        {/* //     <h6>{productObj.price}</h6>
-        //     <div>{productObj.description}</div>
-        //     <div>
-        //       <button> (Comming Later: AddToCart) </button>
-        //     </div>
-        //   </div> */}

@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import ProductContext from "../../contexts/ProductContext";
 import { Link } from "react-router-dom";
 import Card from "@mui/material/Card";
-import { CardHeader, CardMedia, Paper } from "@mui/material";
+import { CardHeader, CardMedia } from "@mui/material";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 

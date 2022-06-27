@@ -77,7 +77,7 @@ app.delete("/products/:productID", (req, res) => {
   Product.findByIdAndDelete(productID).then((Mutzar) => res.send(Mutzar));
 });
 
-// mongoose.connect("mongodb://localhost:27017/ShopGoCode").then(() => {
+
   
 mongoose
   .connect(

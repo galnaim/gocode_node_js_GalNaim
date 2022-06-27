@@ -3,14 +3,12 @@ import mongoose from "mongoose";
 import * as fsp from "fs/promises";
 import dotenv from "dotenv";
 
-const PORT = process.env.PORT || 8000;
-const url = process.env.MONGO_URI || "mongodb://localhost:27017";
+
 
 dotenv.config();
-const express = require('express');
 const app = express();
 app.use(express.json());
-app.use(express.static("app/client/build"));
+app.use(express.static("client/build"));
 
 const { DB_PASS, DB_NAME, DB_COLACTION, DB_ROUTE } = process.env;
 
@@ -60,7 +58,7 @@ app.get("/api/products/:productID", (req, res) => {
     .catch((e) => res.send("ERROR"));
 });
 
-app.get("/products", (req, res) => {
+app.get("/api/products", (req, res) => {
   const { title } = req.query;
   if (title) {
     Product.find({ title }).then((retrievedProduct) =>
@@ -83,10 +81,12 @@ app.delete("/api/products/:productID", (req, res) => {
   Product.findByIdAndDelete(productID).then((Mutzar) => res.send(Mutzar));
 });
 
-app.get('*', (req, res) => {
-  res.sendFile('client/build/index.html');
- });
+app.get("*", (req, res) => {
+  res.sendFile("client/build/index.html");
+});
 
+const PORT = process.env.PORT || 8000;
+const url = process.env.MONGO_URI || "mongodb://localhost:27017";
 
 mongoose
   .connect(`mongodb+srv://${DB_NAME}:${DB_PASS}@${DB_ROUTE}/${DB_COLACTION}`)

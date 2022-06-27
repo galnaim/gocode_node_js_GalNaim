@@ -4,24 +4,11 @@ import { Routes, Route } from "react-router-dom";
 import ProductDetails from "./Views/ProductDetails";
 import About from "./Views/About";
 import Home from "./Views/Home";
-// import FromApp from "./contexts/FromApp"
 
 function App() {
-  // const [CartArray, setCartArray] = useState([]);
-  // const [fixedArray, setFixedArray] = useState([]);
 
-  // function addToCart(id) {
-  //   let increasingCartArray = [
-  //     ...CartArray,
-  //     fixedArray.find(function (item) {
-  //       return item.id === id;
-  //     }),
-  //   ];
-  //   setCartArray(increasingCartArray);
-  // }
 
   return (
-    // <FromApp.Provider value={{addToCart:addToCart}}>
     <React.Fragment>
       <>
         <Routes>
@@ -34,7 +21,6 @@ function App() {
         </Routes>
       </>
     </React.Fragment>
-    // </FromApp.Provider>
   );
 }
 export default App;

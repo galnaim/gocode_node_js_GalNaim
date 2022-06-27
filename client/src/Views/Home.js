@@ -23,7 +23,7 @@ function Home() {
         setFixedArray(InitialProductsArray);
         setdidItLoad(true);
         findExtremePrices(InitialProductsArray);
-        // setValue(extremePrices);
+
       })
       .catch(function () {
         <h1>No Answer from Server</h1>;

@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 8000;
 const url = process.env.MONGO_URI || "mongodb://localhost:27017";
 
 dotenv.config();
-console.log(process.env);
+const express = require('express');
 const app = express();
 app.use(express.json());
 app.use(express.static("app/client/build"));
@@ -84,7 +84,7 @@ app.delete("/api/products/:productID", (req, res) => {
 });
 
 app.get('*', (req, res) => {
-  res.sendFile('/client/build/index.html');
+  res.sendFile('client/build/index.html');
  });
 
 

@@ -16,7 +16,9 @@ import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ExpandMore from "@mui/icons-material/ExpandMore";
-import CardActionArea from "@mui/material/CardActionArea";
+// import CardActionArea from "@mui/material/CardActionArea";
+import { positions } from '@mui/system';
+
 
 export default function ProductDetails({ expanded, handleExpandClick }) {
   const [isItLoading, setisItLoading] = useState([true]);
@@ -41,21 +43,21 @@ export default function ProductDetails({ expanded, handleExpandClick }) {
          :
           (
         
-      <React.Fragment>
-      <Card sx={{ maxWidth: 600 }}>
+      <React.Fragment className="productDetailswraper">
+      <Card sx={{ maxWidth: 800, ml: 24, my: 1}}>
         <CardHeader
-          action={
-            <IconButton aria-label="settings">
-              <MoreVertIcon />
-            </IconButton>
-          }
+          // action={
+          //   <IconButton aria-label="settings">
+          //     <MoreVertIcon />
+          //   </IconButton>
+          // }
           title={productObj.title}
           subheader={productObj.category}
         />
 
         <CardMedia
           component="img"
-          height="400"
+          height="600"
           image={productObj.image}
           alt={productObj.title}
         />
@@ -67,9 +69,9 @@ export default function ProductDetails({ expanded, handleExpandClick }) {
         </CardContent>
 
         <CardActions disableSpacing>
-          <IconButton aria-label="add to favorites">
+          {/* <IconButton aria-label="add to favorites">
             <FavoriteIcon />
-          </IconButton>
+          </IconButton> */}
           <IconButton aria-label="share">
             <ShareIcon />
           </IconButton>
@@ -93,13 +95,14 @@ export default function ProductDetails({ expanded, handleExpandClick }) {
         </Collapse>
       </Card>
                 <br />
-                <Link className="aboutLink" to="/about">
-                  about
-                </Link>
-                <br />
                 <Link className="homeLink" to="/">
                   Home Page
                 </Link>
+                <br/>
+                <Link className="aboutLink" to="/about">
+                  about
+                </Link>
+                
     </React.Fragment>
     )
   );

@@ -25,7 +25,7 @@ const Header = ({
 
   return (
     <nav className="product-filter">
-      <Box sx={{ width: 300 }}>
+      <Box sx={{ width: 290, mr: 4 }}>
         <Slider
           min={Math.floor(leastExpensiveObj)} //The maximum allowed value of the slider.
           max={Math.ceil(mostExpensiveObj)} //The minimum allowed value of the slider.

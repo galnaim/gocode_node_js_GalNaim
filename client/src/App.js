@@ -10,7 +10,6 @@ function App() {
   // const [CartArray, setCartArray] = useState([]);
   // const [fixedArray, setFixedArray] = useState([]);
 
-
   // function addToCart(id) {
   //   let increasingCartArray = [
   //     ...CartArray,
@@ -27,7 +26,10 @@ function App() {
       <>
         <Routes>
           <Route path="/" element={<Home />}></Route>
-          <Route path="/Products/:dynamicProductID" element={<ProductDetails />} />
+          <Route
+            path="/Products/:dynamicProductID"
+            element={<ProductDetails />}
+          />
           <Route path="about" element={<About />} />
         </Routes>
       </>

@@ -12,7 +12,7 @@ function Home() {
   const [changeableProductsArray, setChangeableProductsArray] = useState([]);
   const [didItLoad, setdidItLoad] = useState(false);
   const [CartArray, setCartArray] = useState([]);
-  const [value, setValue] = useState([100, 900]);
+  const [value, setValue] = useState([7 , 1000]);
   const [extremePrices, setExtremePrices] = useState();
 
   useEffect(() => {

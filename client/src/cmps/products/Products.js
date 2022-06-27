@@ -12,7 +12,7 @@ const Products = ({ CartArray, changeableProductsArray }) => {
         {changeableProductsArray.map((item) => (
           <ProductCard
             key={item.id}
-            id={item.id}
+            id={item._id}
             title={item.title}
             price={item.price}
             image={item.image}

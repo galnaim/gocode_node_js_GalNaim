@@ -3,8 +3,6 @@ import mongoose from "mongoose";
 import * as fsp from "fs/promises";
 import dotenv from "dotenv";
 
-
-
 dotenv.config();
 const app = express();
 app.use(express.json());
@@ -78,7 +76,7 @@ app.patch("/api/products/:productID", (req, res) => {
 
 app.delete("/api/products/:productID", (req, res) => {
   const { productID } = req.params;
-  Product.findByIdAndDelete(productID).then((Mutzar) => res.send(Mutzar));
+  Product.findByIdAndDelete(productID).then((product) => res.send(product));
 });
 
 app.get("*", (req, res) => {
@@ -91,5 +89,5 @@ const url = process.env.MONGO_URI || "mongodb://localhost:27017";
 mongoose
   .connect(`mongodb+srv://${DB_NAME}:${DB_PASS}@${DB_ROUTE}/${DB_COLACTION}`)
   .then(() => {
-    app.listen(8000);
+    app.listen(PORT);
   });

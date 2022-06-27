@@ -16,7 +16,7 @@ function Home() {
   const [extremePrices, setExtremePrices] = useState();
 
   useEffect(() => {
-    fetch("https://fakestoreapi.com/products")
+    fetch("/api/products")
       .then((res) => res.json())
       .then((InitialProductsArray) => {
         setChangeableProductsArray(InitialProductsArray);

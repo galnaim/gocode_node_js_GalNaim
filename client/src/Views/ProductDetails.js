@@ -28,7 +28,7 @@ export default function ProductDetails({ expanded, handleExpandClick }) {
   const [productObj, setproductObj] = useState({});
 
   useEffect(() => {
-    fetch(`https://fakestoreapi.com/products/${dynamicProductID}`)
+    fetch(`/api/products/${dynamicProductID}`)
       .then((res) => res.json())
       .then((productObj) => {
         setproductObj(productObj);
